@@ -27,15 +27,17 @@ export default function Tasks() {
 
   return (
     <div>
-      {
-        tasks.map(task =>
-          <Task
-            task={task}
-            taskRef={doc(tasksRef, task.id)}
-            key={task.id}
-          />
-        )
-      }
+      <div className={styles.tasks}>
+        {
+          tasks.map(task =>
+            <Task
+              task={task}
+              taskRef={doc(tasksRef, task.id)}
+              key={task.id}
+            />
+          )
+        }
+      </div>
       <form onSubmit={e => {
         e.preventDefault();
         addTask();
