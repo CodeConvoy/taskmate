@@ -18,6 +18,7 @@ export default function Tasks() {
 
   // adds new task in firebase
   async function addTask() {
+    setTitle('');
     await addDoc(tasksRef, { title });
   }
 

@@ -1,4 +1,4 @@
-import deleteDoc from 'firebase/firestore';
+import { deleteDoc } from 'firebase/firestore';
 
 import styles from '../styles/components/Task.module.css';
 
