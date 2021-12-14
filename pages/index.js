@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { getAuth, signOut } from 'firebase/auth';
 import signInWithGoogle from '../util/signInWithGoogle';
 
@@ -9,6 +11,11 @@ export default function Index() {
   return (
     <div className={styles.container}>
       <div className={styles.center}>
+        <Image
+          src="/logo.png"
+          width="48"
+          height="48"
+        />
         <h1>Taskmate</h1>
         {
           auth.currentUser ?
