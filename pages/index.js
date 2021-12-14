@@ -7,16 +7,19 @@ export default function Index() {
   const auth = getAuth();
 
   return (
-    <div>
-      {
-        auth.currentUser ?
-        <button onClick={() => signOut(auth)}>
-          Sign Out
-        </button> :
-        <button onClick={signInWithGoogle}>
-          Sign in with Google
-        </button>
-      }
+    <div className={styles.container}>
+      <div className={styles.center}>
+        <h1>Taskmate</h1>
+        {
+          auth.currentUser ?
+          <button onClick={() => signOut(auth)}>
+            Sign Out
+          </button> :
+          <button onClick={signInWithGoogle}>
+            Sign in with Google
+          </button>
+        }
+      </div>
     </div>
   );
 }
