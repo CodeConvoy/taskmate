@@ -38,11 +38,15 @@ export default function Tasks() {
           )
         }
       </div>
-      <form onSubmit={e => {
-        e.preventDefault();
-        addTask();
-      }}>
+      <form
+        className={styles.form}
+        onSubmit={e => {
+          e.preventDefault();
+          addTask();
+        }}
+      >
         <input
+          placeholder="Title"
           value={title}
           onChange={e => setTitle(e.target.value)}
           required
