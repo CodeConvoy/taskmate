@@ -4,6 +4,7 @@ import { getApps, initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { firebaseConfig } from '../util/firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useEffect, useState } from 'react';
 
 import '../styles/globals.css';
 
@@ -13,9 +14,17 @@ if (!getApps().length) initializeApp(firebaseConfig);
 export default function App(props) {
   const { Component, pageProps } = props;
 
-  // listen for user auth
   const auth = getAuth();
-  useAuthState(auth);
+
+  const [authed, setAuthed] = useState(undefined);
+
+  // listen for user auth
+  useEffect(() => {
+    const authListener = auth.onAuthStateChanged(() => {
+      setAuthed(!!auth.currentUser);
+    });
+    return () => authListener();
+  }, []);
 
   return (
     <>
@@ -26,7 +35,7 @@ export default function App(props) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
       </Head>
-      <Component {...pageProps} />
+      <Component authed={authed} {...pageProps} />
     </>
   );
 }
