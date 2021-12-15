@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
 import { getAuth, signOut } from 'firebase/auth';
@@ -17,6 +18,14 @@ export default function Index() {
           height="48"
         />
         <h1>Taskmate</h1>
+        <div className={styles.links}>
+          {
+            auth.currentUser &&
+            <Link href="/home">
+              <a>Home</a>
+            </Link>
+          }
+        </div>
         {
           auth.currentUser ?
           <button onClick={() => signOut(auth)}>
