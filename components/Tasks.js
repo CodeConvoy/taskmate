@@ -2,24 +2,33 @@ import Task from './Task';
 import Loading from './Loading';
 
 import { useState } from 'react';
-import { getFirestore, collection, addDoc, doc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import {
+  getFirestore, collection, addDoc, doc, query, orderBy
+} from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import styles from '../styles/components/Tasks.module.css';
 
 export default function Tasks() {
+  const auth = getAuth();
   const db = getFirestore();
 
   const [title, setTitle] = useState('');
 
   // listen for tasks
   const tasksRef = collection(db, 'tasks');
-  const [tasks] = useCollectionData(tasksRef, { idField: 'id' });
+  const tasksQuery = query(tasksRef, orderBy('date', 'desc'));
+  const [tasks] = useCollectionData(tasksQuery, { idField: 'id' });
 
   // adds new task in firebase
   async function addTask() {
     setTitle('');
-    await addDoc(tasksRef, { title });
+    await addDoc(tasksRef, {
+      title: title,
+      date: new Date().getTime(),
+      uid: auth.currentUser.uid
+    });
   }
 
   // return if loading tasks
