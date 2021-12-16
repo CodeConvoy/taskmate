@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  position: sticky;
+  top: 0;
+  align-items: center;
+  background: #efefef;
+  height: 80px;
+  padding: 0 10px;
+}
+
+.container > a {
+  color: var(--blue);
+  margin: 0 10px;
+}
+
+.container > a:hover {
+  color: var(--purple);
+  text-decoration: underline;
+}
