@@ -7,8 +7,8 @@ export default function Project(props) {
   const { id, title } = project;
 
   return (
-    <div>
-      <Link href={`/${id}`}>
+    <div className={styles.container}>
+      <Link href={`/projects/${id}`}>
         <a>{title}</a>
       </Link>
     </div>

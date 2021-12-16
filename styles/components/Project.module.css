@@ -1,0 +1,14 @@
+.container {
+  padding: 20px;
+  margin: 20px;
+  background: #efefef;
+}
+
+.container > a {
+  color: var(--blue);
+}
+
+.container > a:hover {
+  color: var(--purple);
+  text-decoration: underline;
+}
