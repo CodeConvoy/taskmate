@@ -8,8 +8,8 @@ export default function Header() {
       <Link href="/">
         <a>Index</a>
       </Link>
-      <Link href="/home">
-        <a>Home</a>
+      <Link href="/projects">
+        <a>Projects</a>
       </Link>
     </div>
   );
