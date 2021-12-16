@@ -1,10 +1,12 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { deleteDoc } from 'firebase/firestore';
 
 import styles from '../styles/components/Task.module.css';
 
 export default function Task(props) {
   const { task, taskRef } = props;
-  const { title } = props.task;
+  const { title, description } = props.task;
 
   // deletes task in firebase
   async function deleteTask() {
@@ -13,10 +15,11 @@ export default function Task(props) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>{title}</h1>
+      <p>{description}</p>
       <button onClick={deleteTask}>
-        Delete
+        <DeleteIcon />
       </button>
     </div>
   );
