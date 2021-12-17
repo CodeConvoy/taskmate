@@ -1,6 +1,7 @@
 import Loading from '../../components/Loading';
 import Task from '../../components/Task';
 
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   getFirestore, collection, doc, query, orderBy
@@ -11,6 +12,8 @@ import styles from '../../styles/pages/Project.module.css';
 
 export default function Project() {
   const db = getFirestore();
+
+  const [title, setTitle] = useState('');
 
   // get project id
   const router = useRouter();
@@ -37,6 +40,20 @@ export default function Project() {
           )
         }
       </div>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          addTask();
+        }}
+      >
+        <input
+          placeholder="Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          required
+        />
+        <button>New Task</button>
+      </form>
     </div>
   );
 }
