@@ -3,14 +3,16 @@ import Task from '../../components/Task';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { getAuth } from 'firebase/auth';
 import {
-  getFirestore, collection, doc, query, orderBy
+  getFirestore, collection, doc, query, orderBy, addDoc
 } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import styles from '../../styles/pages/Project.module.css';
 
 export default function Project() {
+  const auth = getAuth();
   const db = getFirestore();
 
   const [title, setTitle] = useState('');
@@ -23,6 +25,16 @@ export default function Project() {
   const tasksRef = collection(db, 'projects', id ?? '~', 'tasks');
   const tasksQuery = query(tasksRef, orderBy('date', 'desc'));
   const [tasks] = useCollectionData(tasksQuery, { idField: 'id' });
+
+  // adds new task in firebase
+  async function addTask() {
+    setTitle('');
+    await addDoc(tasksRef, {
+      title: title,
+      date: new Date().getTime(),
+      uid: auth.currentUser.uid
+    });
+  }
 
   return (
     <div>
