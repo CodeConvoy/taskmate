@@ -1,3 +1,6 @@
+import Loading from '../../components/Loading';
+import Task from '../../components/Task';
+
 import { useRouter } from 'next/router';
 import {
   getFirestore, collection, doc, query, orderBy
@@ -21,6 +24,19 @@ export default function Project() {
   return (
     <div>
       <h1>Project {id}</h1>
+      <div>
+        {
+          !tasks ?
+          <Loading /> :
+          tasks.map(task =>
+            <Task
+              task={task}
+              taskRef={doc(tasksRef, task.id)}
+              key={task.id}
+            />
+          )
+        }
+      </div>
     </div>
   );
 }
