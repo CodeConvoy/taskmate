@@ -37,9 +37,9 @@ export default function Project() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Project {id}</h1>
-      <div>
+      <div className={styles.tasks}>
         {
           !tasks ?
           <Loading /> :
@@ -53,6 +53,7 @@ export default function Project() {
         }
       </div>
       <form
+        className={styles.form}
         onSubmit={e => {
           e.preventDefault();
           addTask();
