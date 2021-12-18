@@ -37,6 +37,20 @@ export default function Project() {
     });
   }
 
+  // swaps task orders
+  function reorderTasks(indexA, indexB) {
+    const [removed] = tasks.splice(indexA, 1);
+    tasks.splice(indexB, 0, removed);
+    updateOrder();
+  }
+
+  // called after todo drag ends
+  function onDragEnd(result) {
+    if (!result.destination) return; // out of bounds
+    if (result.source.index === result.destination.index) return; // same spot
+    reorderTasks(result.source.index, result.destination.index);
+  }
+
   return (
     <div className={styles.container}>
       <h1>Project {id}</h1>
