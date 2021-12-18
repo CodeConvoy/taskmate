@@ -11,7 +11,7 @@ export default function Project(props) {
 
   // deletes project in firebase
   async function deleteProject() {
-    if (!window.confirm('Delete task?')) return;
+    if (!window.confirm('Delete project?')) return;
     await deleteDoc(projectRef);
   }
 
