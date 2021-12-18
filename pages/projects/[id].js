@@ -45,6 +45,31 @@ export default function Project() {
           {
             (provided, snapshot) =>
             <div ref={provided.innerRef} {...provided.droppableProps}>
+              {
+                tasks &&
+                tasks.map((task, i) =>
+                <Draggable
+                  index={i}
+                  draggableId={task.id}
+                  key={task.id}
+                >
+                  {
+                    (provided, snapshot) =>
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <Task
+                        task={task}
+                        taskRef={doc(tasksRef, task.id)}
+                        key={task.id}
+                      />
+                    </div>
+                  }
+                </Draggable>
+                )
+              }
             </div>
           }
         </Droppable>
