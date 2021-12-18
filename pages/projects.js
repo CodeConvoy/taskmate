@@ -23,16 +23,19 @@ export default function Projects() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Projects</h1>
-      {
-        !projects ?
-        <Loading /> :
-        projects.map(project =>
-          <Project project={project} key={project.id} />
-        )
-      }
+      <div className={styles.projects}>
+        {
+          !projects ?
+          <Loading /> :
+          projects.map(project =>
+            <Project project={project} key={project.id} />
+          )
+        }
+      </div>
       <form
+        className={styles.form}
         onSubmit={e => {
           e.preventDefault();
           addProject();

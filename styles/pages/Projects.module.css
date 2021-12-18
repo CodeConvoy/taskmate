@@ -1,0 +1,31 @@
+.container > h1 {
+  margin: 20px;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.form > input {
+  padding: 10px;
+  border: 2px solid #efefef;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.form > button {
+  background: #efefef;
+  padding: 10px 20px;
+  border: 2px solid #999;
+  border-radius: 8px;
+}
+
+.form > button:hover {
+  background: #ddd;
+}
+
+.form > button:active {
+  transform: scale(0.95);
+}
