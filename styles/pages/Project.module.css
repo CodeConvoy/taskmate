@@ -2,10 +2,8 @@
   margin: 20px;
 }
 
-.tasks {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
+.task {
+  margin: 0 20px 20px 20px;
 }
 
 .form {

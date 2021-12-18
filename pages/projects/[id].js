@@ -56,6 +56,7 @@ export default function Project() {
                   {
                     (provided, snapshot) =>
                     <div
+                      className={styles.task}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
@@ -70,6 +71,7 @@ export default function Project() {
                 </Draggable>
                 )
               }
+              {provided.placeholder}
             </div>
           }
         </Droppable>
