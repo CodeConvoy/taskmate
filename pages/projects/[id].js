@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getAuth } from 'firebase/auth';
 import {
-  getFirestore, collection, doc, query, orderBy, addDoc
+  getFirestore, collection, doc, query, orderBy, addDoc, writeBatch
 } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -24,7 +24,7 @@ export default function Project() {
 
   // listen for tasks
   const tasksRef = collection(db, 'projects', id ?? '~', 'tasks');
-  const tasksQuery = query(tasksRef, orderBy('date', 'desc'));
+  const tasksQuery = query(tasksRef, orderBy('order'));
   const [tasks] = useCollectionData(tasksQuery, { idField: 'id' });
 
   // adds new task in firebase
@@ -33,8 +33,21 @@ export default function Project() {
     await addDoc(tasksRef, {
       title: title,
       date: new Date().getTime(),
-      uid: auth.currentUser.uid
+      uid: auth.currentUser.uid,
+      order: tasks.length
     });
+  }
+
+  // updates task orders in firebase
+  async function updateOrder() {
+    const batch = writeBatch(db); // create batch
+    // for each task
+    await tasks.forEach((task, i) => {
+      // update task doc at id with order
+      const taskDoc = doc(tasksRef, task.id);
+      batch.update(taskDoc, { order: i });
+    });
+    batch.commit(); // commit batch
   }
 
   // swaps task orders
