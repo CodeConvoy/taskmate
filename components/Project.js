@@ -3,7 +3,8 @@ import Link from 'next/link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { deleteDoc } from 'firebase/firestore';
+import { useState } from 'react';
+import { deleteDoc, updateDoc } from 'firebase/firestore';
 
 import styles from '../styles/components/Project.module.css';
 
@@ -18,6 +19,18 @@ export default function Project(props) {
   async function deleteProject() {
     if (!window.confirm('Delete project?')) return;
     await deleteDoc(projectRef);
+  }
+
+  // updates project in firebase
+  async function updateProject() {
+    setDialogOpen(false);
+    console.log(newTitle);
+    await updateDoc(projectRef, { title: newTitle });
+  }
+
+  // resets dialog data
+  function resetDialog() {
+    setNewTitle(title);
   }
 
   return (
