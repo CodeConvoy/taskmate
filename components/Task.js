@@ -1,13 +1,16 @@
 import Dialog from './Dialog';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
-import { deleteDoc } from 'firebase/firestore';
+import { useState } from 'react';
 
 import styles from '../styles/components/Task.module.css';
 
 export default function Task(props) {
   const { task, taskRef } = props;
   const { title, description } = props.task;
+
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   // deletes task in firebase
   async function deleteTask() {
@@ -21,6 +24,12 @@ export default function Task(props) {
       <p>{description}</p>
       <button onClick={deleteTask}>
         <DeleteIcon />
+      </button>
+      <button onClick={() => {
+        resetDialog();
+        setDialogOpen(true);
+      }}>
+        <EditIcon />
       </button>
       <Dialog open={dialogOpen} setOpen={setDialogOpen}>
         <h1>Editing {title}</h1>
