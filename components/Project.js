@@ -1,5 +1,7 @@
 import Dialog from './Dialog';
 import Link from 'next/link';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import { deleteDoc } from 'firebase/firestore';
 
@@ -8,6 +10,9 @@ import styles from '../styles/components/Project.module.css';
 export default function Project(props) {
   const { project, projectRef } = props;
   const { id, title } = project;
+
+  const [newTitle, setNewTitle] = useState(title);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   // deletes project in firebase
   async function deleteProject() {
@@ -22,6 +27,12 @@ export default function Project(props) {
       </Link>
       <button onClick={deleteProject}>
         <DeleteIcon />
+      </button>
+      <button onClick={() => {
+        resetDialog();
+        setDialogOpen(true);
+      }}>
+        <EditIcon />
       </button>
       <Dialog open={dialogOpen} setOpen={setDialogOpen}>
         <h1>Editing {title}</h1>
