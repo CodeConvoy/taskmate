@@ -1,4 +1,4 @@
-import DeleteIcon from '@mui/icons-material/Delete';
+import Dialog from './Dialog';
 import Link from 'next/link';
 
 import { deleteDoc } from 'firebase/firestore';
@@ -23,6 +23,20 @@ export default function Project(props) {
       <button onClick={deleteProject}>
         <DeleteIcon />
       </button>
+      <Dialog open={dialogOpen} setOpen={setDialogOpen}>
+        <h1>Editing {title}</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          updateProject();
+        }}>
+          <input
+            value={newTitle}
+            onChange={e => setNewTitle(e.target.value)}
+            required
+          />
+          <button>Update</button>
+        </form>
+      </Dialog>
     </div>
   );
 }
