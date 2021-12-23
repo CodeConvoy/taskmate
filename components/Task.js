@@ -1,3 +1,4 @@
+import Dialog from './Dialog';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { deleteDoc } from 'firebase/firestore';
@@ -21,6 +22,20 @@ export default function Task(props) {
       <button onClick={deleteTask}>
         <DeleteIcon />
       </button>
+      <Dialog open={dialogOpen} setOpen={setDialogOpen}>
+        <h1>Editing {title}</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          updateTask();
+        }}>
+          <input
+            value={newTitle}
+            onChange={e => setNewTitle(e.target.value)}
+            required
+          />
+          <button>Update</button>
+        </form>
+      </Dialog>
     </div>
   );
 }
