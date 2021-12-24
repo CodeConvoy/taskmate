@@ -21,8 +21,8 @@ export default function Index() {
         <div className={styles.links}>
           {
             auth.currentUser &&
-            <Link href="/home">
-              <a>Home</a>
+            <Link href="/projects">
+              <a>Projects</a>
             </Link>
           }
         </div>

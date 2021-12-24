@@ -1,7 +1,7 @@
 import Loading from '../components/Loading';
 import Project from '../components/Project';
 
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
 
@@ -30,7 +30,11 @@ export default function Projects() {
           !projects ?
           <Loading /> :
           projects.map(project =>
-            <Project project={project} key={project.id} />
+            <Project
+              project={project}
+              projectRef={doc(projectsRef, project.id)}
+              key={project.id}
+            />
           )
         }
       </div>
