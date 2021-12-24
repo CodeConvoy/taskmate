@@ -11,6 +11,13 @@
 .container > a {
   color: var(--blue);
   margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.container > a > h1 {
+  color: #000;
+  margin-right: 10px;
 }
 
 .container > a:hover {
